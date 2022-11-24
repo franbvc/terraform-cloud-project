@@ -1,0 +1,1 @@
+{"rule_0": {"from_port": 3306, "to_port": 3306, "protocol": "tcp", "cidr_blocks": ["192.168.0.0/20"], "sg": "sg_0"}, "rule_1": {"from_port": 443, "to_port": 443, "protocol": "tcp", "cidr_blocks": ["192.168.0.0/20"], "sg": "sg_1"}, "rule_2": {"from_port": 80, "to_port": 80, "protocol": "tcp", "cidr_blocks": ["192.168.0.0/20"], "sg": "sg_1"}}

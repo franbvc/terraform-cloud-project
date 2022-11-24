@@ -1,0 +1,20 @@
+{
+    "rule_0": {
+        "from_port": 0,
+        "to_port": 0,
+        "protocol": "-1",
+        "cidr_blocks": [
+            "0.0.0.0/0"
+        ],
+        "sg": "sg_0"
+    },
+    "rule_1": {
+        "from_port": 0,
+        "to_port": 0,
+        "protocol": "-1",
+        "cidr_blocks": [
+            "0.0.0.0/0"
+        ],
+        "sg": "sg_1"
+    }
+}
