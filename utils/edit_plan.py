@@ -16,6 +16,7 @@ from utils.utils import *
 OKGREEN = "\033[92m"
 ENDC = "\033[0m"
 FAIL = "\033[91m"
+WARNING = "\033[93m"
 
 
 def dict_to_file(dict, file_name):
@@ -243,27 +244,156 @@ def create():
 
 def update():
     while True:
-        question_update = question_create
-        question_update[0]["message"] = "What resource do you want to update?"
         answer = prompt(question_update)
+        if answer["resource_type"] == "Security Group Rule (Ingress)":
+            with open("../commit/sg.json", "r") as file:
+                security_groups = json.load(file)
+            with open("../commit/sg_ingress.json", "r") as file:
+                sg_ingress_rules = json.load(file)
 
-        if answer["resource_type"] == "VPC":
-            pass
+            question_sg_rule_update[0]["choices"] = [
+                f"Name: {i}, \n"
+                f"From Port: {sg_ingress_rules[i]['from_port']}, \n"
+                f"To Port: {sg_ingress_rules[i]['to_port']}, \n"
+                f"Protocol: {sg_ingress_rules[i]['protocol']}, \n"
+                f"CIDR Blocks: {sg_ingress_rules[i]['cidr_blocks']}, \n"
+                f"Security Group: {security_groups[sg_ingress_rules[i]['sg']]['sg_name']}, \n"
+                for i in sg_ingress_rules.keys()
+            ]
 
-        elif answer["resource_type"] == "Subnet":
-            pass
+            answer = prompt(question_sg_rule_update)
+            selected_rule = answer["sg_rule"].split(",")[0].split(":")[1].strip()
 
-        elif answer["resource_type"] == "Security Group":
-            pass
+            answer_field = prompt(question_sg_rule_update_field)
 
-        elif answer["resource_type"] == "Security Group Rule":
-            pass
+            if answer_field["sg_rule_field"] == "cidr_blocks":
+                question_sg_rule_update_value[0]["default"] = ",".join(
+                    sg_ingress_rules[selected_rule][answer_field["sg_rule_field"]]
+                )
+
+            else:
+                question_sg_rule_update_value[0]["default"] = str(
+                    sg_ingress_rules[selected_rule][answer_field["sg_rule_field"]]
+                )
+
+            answer_value = prompt(question_sg_rule_update_value)
+
+            if answer_field["sg_rule_field"] == "cidr_blocks":
+                sg_ingress_rules[selected_rule][
+                    answer_field["sg_rule_field"]
+                ] = answer_value["sg_rule_value"].split(",")
+
+            elif (answer_field["sg_rule_field"] == "from_port") or (
+                answer_field["sg_rule_field"] == "to_port"
+            ):
+                sg_ingress_rules[selected_rule][answer_field["sg_rule_field"]] = int(
+                    answer_value["sg_rule_value"]
+                )
+
+            else:
+                sg_ingress_rules[selected_rule][
+                    answer_field["sg_rule_field"]
+                ] = answer_value["sg_rule_value"]
+
+            dict_to_file(sg_ingress_rules, "../commit/sg_ingress.json")
+            print(
+                f"{OKGREEN}File saved to commit/sg_ingress.json, please commit changes to apply.{ENDC} \n"
+            )
+
+        elif answer["resource_type"] == "Security Group Rule (Egress)":
+            with open("../commit/sg.json", "r") as file:
+                security_groups = json.load(file)
+            with open("../commit/sg_egress.json", "r") as file:
+                sg_egress_rules = json.load(file)
+
+            question_sg_rule_update[0]["choices"] = [
+                f"Name: {i}, \n"
+                f"From Port: {sg_egress_rules[i]['from_port']}, \n"
+                f"To Port: {sg_egress_rules[i]['to_port']}, \n"
+                f"Protocol: {sg_egress_rules[i]['protocol']}, \n"
+                f"CIDR Blocks: {sg_egress_rules[i]['cidr_blocks']}, \n"
+                f"Security Group: {security_groups[sg_egress_rules[i]['sg']]['sg_name']}, \n"
+                for i in sg_egress_rules.keys()
+            ]
+
+            answer = prompt(question_sg_rule_update)
+            selected_rule = answer["sg_rule"].split(",")[0].split(":")[1].strip()
+
+            answer_field = prompt(question_sg_rule_update_field)
+
+            if answer_field["sg_rule_field"] == "cidr_blocks":
+                question_sg_rule_update_value[0]["default"] = ",".join(
+                    sg_egress_rules[selected_rule][answer_field["sg_rule_field"]]
+                )
+
+            else:
+                question_sg_rule_update_value[0]["default"] = str(
+                    sg_egress_rules[selected_rule][answer_field["sg_rule_field"]]
+                )
+
+            answer_value = prompt(question_sg_rule_update_value)
+
+            if answer_field["sg_rule_field"] == "cidr_blocks":
+                sg_egress_rules[selected_rule][
+                    answer_field["sg_rule_field"]
+                ] = answer_value["sg_rule_value"].split(",")
+
+            elif (answer_field["sg_rule_field"] == "from_port") or (
+                answer_field["sg_rule_field"] == "to_port"
+            ):
+                sg_egress_rules[selected_rule][answer_field["sg_rule_field"]] = int(
+                    answer_value["sg_rule_value"]
+                )
+
+            else:
+                sg_egress_rules[selected_rule][
+                    answer_field["sg_rule_field"]
+                ] = answer_value["sg_rule_value"]
+
+            dict_to_file(sg_egress_rules, "../commit/sg_egress.json")
+            print(
+                f"{OKGREEN}File saved to commit/sg_egress.json, please commit changes to apply.{ENDC} \n"
+            )
 
         elif answer["resource_type"] == "EC2 Instance":
-            pass
+            # update the sg of the ec2 instance
+            with open("../commit/ec2.json", "r") as file:
+                ec2_instances = json.load(file)
+            with open("../commit/sg.json", "r") as file:
+                security_groups = json.load(file)
 
-        elif answer["resource_type"] == "IAM User":
-            pass
+            question_ec2_update[0]["choices"] = [
+                f"Local ID: {i}, \n"
+                f"Name: {ec2_instances[i]['name']}, \n"
+                f"AMI: {ec2_instances[i]['ami']}, \n"
+                f"Instance Type: {ec2_instances[i]['instance_type']}, \n"
+                f"Subnet: {ec2_instances[i]['subnet']}, \n"
+                for i in ec2_instances.keys()
+            ]
+
+            answer_ec2 = prompt(question_ec2_update)
+
+            question_ec2_update_sg[0]["choices"] = [
+                {"name": f"{i}, ({security_groups[i]['sg_name']})"}
+                for i in security_groups.keys()
+            ]
+
+            answer_sg = prompt(question_ec2_update_sg)
+
+            answer_sg["security_group_ids"] = [
+                i.split(",")[0] for i in answer_sg["security_group_ids"]
+            ]
+
+            instance = answer_ec2["ec2"].split(",")[0].split(":")[1].strip()
+
+            ec2_instances[instance]["security_group_ids"] = answer_sg[
+                "security_group_ids"
+            ]
+
+            dict_to_file(ec2_instances, "../commit/ec2.json")
+            print(
+                f"{OKGREEN}File saved to commit/ec2.json, please commit changes to apply.{ENDC} \n"
+            )
 
         elif answer["resource_type"] == "Go back to menu":
             return
@@ -393,9 +523,7 @@ def edit_plan():
             create()
 
         elif answer["action_type"] == "Update":
-            print(
-                f"{OKGREEN}Update is yet to be implemented. For now, please delete and create again.{ENDC} \n"
-            )
+            update()
 
         elif answer["action_type"] == "Delete":
             delete()

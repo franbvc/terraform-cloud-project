@@ -1,1 +1,20 @@
-{"instance_0": {"name": "test_0", "ami": "ami-08c40ec9ead489470", "instance_type": "t2.micro", "subnet": "subnet_0", "security_group_ids": ["sg_0"]}, "instance_1": {"name": "test_1", "ami": "ami-08c40ec9ead489470", "instance_type": "t2.small", "subnet": "subnet_0", "security_group_ids": ["sg_1"]}}
+{
+  "instance_0": {
+    "name": "test_0",
+    "ami": "ami-08c40ec9ead489470",
+    "instance_type": "t2.micro",
+    "subnet": "subnet_0",
+    "security_group_ids": [
+      "sg_0"
+    ]
+  },
+  "instance_1": {
+    "name": "test_1",
+    "ami": "ami-08c40ec9ead489470",
+    "instance_type": "t2.small",
+    "subnet": "subnet_0",
+    "security_group_ids": [
+      "sg_1"
+    ]
+  }
+}

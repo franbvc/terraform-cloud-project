@@ -239,3 +239,66 @@ question_user_to_delete = [
         "choices": [],
     }
 ]
+
+question_update_vpc = [
+    {
+        "type": "list",
+        "name": "vpc_field",
+        "message": "What field do you want to update?",
+        "choices": [
+            "vpc_name",
+            "vpc_cidr",
+        ],
+    }
+]
+
+question_sg_rule_update = [
+    {
+        "type": "list",
+        "name": "sg_rule",
+        "message": "What rule do you want to update?",
+        "choices": [],
+    }
+]
+
+question_sg_rule_update_field = [
+    {
+        "type": "list",
+        "name": "sg_rule_field",
+        "message": "What field do you want to update?",
+        "choices": [
+            "from_port",
+            "to_port",
+            "protocol",
+            "cidr_blocks",
+        ],
+    }
+]
+
+question_sg_rule_update_value = [
+    {
+        "type": "input",
+        "name": "sg_rule_value",
+        "message": "What is the new value?",
+        "default": "",
+    }
+]
+
+question_ec2_update = [
+    {
+        "type": "list",
+        "name": "ec2",
+        "message": "What EC2 instance do you want to update?",
+        "choices": [],
+    }
+]
+
+
+question_ec2_update_sg = [
+    {
+        "type": "checkbox",
+        "name": "security_group_ids",
+        "message": "What are the security groups of the EC2 instance?",
+        "choices": [],
+    },
+]

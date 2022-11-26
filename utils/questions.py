@@ -76,6 +76,20 @@ question_create = [
     }
 ]
 
+question_update = [
+    {
+        "type": "list",
+        "name": "resource_type",
+        "message": "What resource do you want to update?",
+        "choices": [
+            "Security Group Rule (Ingress)",
+            "Security Group Rule (Egress)",
+            "EC2 Instance",
+            "Go back to menu",
+        ],
+    }
+]
+
 question_delete = [
     {
         "type": "list",
