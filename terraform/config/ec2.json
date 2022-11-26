@@ -6,7 +6,8 @@
     "subnet": "subnet_0",
     "security_group_ids": [
       "sg_0"
-    ]
+    ],
+    "instance_az": "us-east-1a"
   },
   "instance_1": {
     "name": "test_1",
@@ -15,6 +16,17 @@
     "subnet": "subnet_0",
     "security_group_ids": [
       "sg_1"
-    ]
+    ],
+    "instance_az": "us-east-1a"
+  },
+  "instance_2": {
+    "name": "test_2",
+    "ami": "ami-08c40ec9ead489470",
+    "instance_type": "t2.small",
+    "subnet": "subnet_1",
+    "security_group_ids": [
+      "sg_1"
+    ],
+    "instance_az": "us-east-1b"
   }
 }

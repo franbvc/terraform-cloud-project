@@ -1,1 +1,1 @@
-{"subnet_0": {"subnet_name": "subnet-0", "subnet_cidr": "192.168.1.0/24", "subnet_az": "us-east-1a"}, "subnet_1": {"subnet_name": "subnet-1", "subnet_cidr": "192.168.2.0/24", "subnet_az": "us-east-1a"}}
+{"subnet_0": {"subnet_name": "subnet-0", "subnet_cidr": "192.168.1.0/24", "subnet_az": "us-east-1a"}, "subnet_1": {"subnet_name": "subnet-1", "subnet_cidr": "192.168.2.0/24", "subnet_az": "us-east-1b"}}

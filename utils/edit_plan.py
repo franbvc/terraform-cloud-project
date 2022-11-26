@@ -180,10 +180,10 @@ def create():
             instances_name_list = [instances[i]["name"] for i in instances.keys()]
 
             while True:
-                question_ec2[3]["choices"] = [
+                question_ec2[4]["choices"] = [
                     f"{i}, ({subnets[i]['subnet_name']})" for i in subnets_list
                 ]
-                question_ec2[4]["choices"] = [
+                question_ec2[5]["choices"] = [
                     {"name": f"{i}, ({security_groups[i]['sg_name']})"}
                     for i in security_groups_list
                 ]

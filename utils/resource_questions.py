@@ -148,6 +148,17 @@ question_ec2 = [
     },
     {
         "type": "list",
+        "name": "instance_az",
+        "message": "What availability zone do you want to use?",
+        "choices": [
+            "us-east-1a",
+            "us-east-1b",
+            "us-east-1c",
+            "us-east-1d",
+        ],
+    },
+    {
+        "type": "list",
         "name": "subnet",
         "message": "What is the subnet of the EC2 instance?",
         "choices": [],

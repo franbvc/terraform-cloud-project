@@ -97,6 +97,7 @@ module "ec2_instance" {
 
   ami           = each.value.ami
   instance_type = each.value.instance_type
+  instance_az   = each.value.instance_az
 
   subnet_id          = module.subnet[each.value.subnet].subnet_id
   security_group_ids = [for sg in each.value.security_group_ids : module.security_group[sg].sg_id]

@@ -32,4 +32,7 @@ variable "instance_name" {
   default     = "Machine"
 }
 
-
+variable "instance_az" {
+  description = "The availability zone to start the instance in"
+  type        = string
+}
