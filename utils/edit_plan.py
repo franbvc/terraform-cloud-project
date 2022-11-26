@@ -228,6 +228,16 @@ def create():
 
                 users_name_list.append(answer["name"])
                 users[f"user_{counter}"] = answer
+
+                answer_policy = prompt(question_user_add_policy)
+
+                if answer_policy["add_policy"] == "Yes":
+                    answer_policy_info = prompt(question_user_policy)
+                    users[f"user_{counter}"]["policy"] = policy_dict(answer_policy_info)
+
+                else:
+                    users[f"user_{counter}"]["policy"] = {}
+
                 counter += 1
                 answer = prompt(question_user_create_more)
                 if answer["create_more"] == "No":

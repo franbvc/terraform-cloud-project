@@ -180,6 +180,40 @@ question_user = [
     }
 ]
 
+question_user_add_policy = [
+    {
+        "type": "list",
+        "name": "add_policy",
+        "message": "Do you want to add a policy to the user?",
+        "choices": [
+            "Yes",
+            "No",
+        ],
+    }
+]
+
+question_user_policy = [
+    {
+        "type": "input",
+        "name": "policy_actions",
+        "message": "What are the actions of the policy? (separate by comma)",
+    },
+    {
+        "type": "input",
+        "name": "policy_resource",
+        "message": "What is the resource of the policy?",
+    },
+    {
+        "type": "list",
+        "name": "policy_effect",
+        "message": "What is the effect of the policy?",
+        "choices": [
+            "Allow",
+            "Deny",
+        ],
+    },
+]
+
 question_user_create_more = [
     {
         "type": "list",

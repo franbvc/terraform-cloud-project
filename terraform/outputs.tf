@@ -58,10 +58,10 @@ output "security_group_summary_full" {
   value = [
     for security_group in module.security_group :
     {
-      security_group_name = security_group.sg_name
-      security_group_id   = security_group.sg_id
+      security_group_name    = security_group.sg_name
+      security_group_id      = security_group.sg_id
       security_group_ingress = security_group.sg_ingress
-      security_group_egress = security_group.sg_egress
+      security_group_egress  = security_group.sg_egress
     }
   ]
 }

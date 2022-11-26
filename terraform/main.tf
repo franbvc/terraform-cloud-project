@@ -18,6 +18,10 @@ locals {
   sg_egress_map  = jsondecode(file("./config/sg_egress.json"))
   ec2_map        = jsondecode(file("./config/ec2.json"))
   user_map       = jsondecode(file("./config/user.json"))
+  user_policy_map = {
+    for user in local.user_map : user.name => user.policy
+    if user.policy != {}
+  }
 }
 
 provider "aws" {
@@ -56,6 +60,10 @@ module "security_group" {
 }
 
 resource "aws_security_group_rule" "ingress_rules" {
+  depends_on = [
+    module.security_group
+  ]
+
   for_each = local.sg_ingress_map
 
   type              = "ingress"
@@ -67,6 +75,10 @@ resource "aws_security_group_rule" "ingress_rules" {
 }
 
 resource "aws_security_group_rule" "egress_rules" {
+  depends_on = [
+    module.security_group
+  ]
+
   for_each = local.sg_egress_map
 
   type              = "egress"
@@ -98,4 +110,16 @@ module "iam_user" {
   for_each = local.user_map
 
   username = each.value.name
+}
+
+resource "aws_iam_user_policy" "user_policies" {
+  depends_on = [
+    module.iam_user
+  ]
+
+  for_each = local.user_policy_map
+
+  user = each.key
+
+  policy = jsonencode(each.value)
 }

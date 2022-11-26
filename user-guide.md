@@ -1,3 +1,8 @@
+---
+title: Application User Guide
+author: Francisco Costa
+---
+
 # Proposta
 Essa aplicação foi criada com o intuito de proporcionar uma experiência simples e amigável para usuários que buscam criar uma infraestrutura de cloud na AWS de forma rápida e fácil.
 
@@ -39,7 +44,7 @@ from collections.abc import Mapping
 touch .env
 ```
 
-## 2.1. Adicionar asvariáveis de ambiente no arquivo .env com base no arquivo .env.template
+## 2.1. Adicionar as variáveis de ambiente no arquivo .env com base no arquivo .env.template
 
 ## 3. Ativar o ambiente virtual
 ```bash
@@ -75,17 +80,11 @@ pergunta ao usuario quais arquivos ele deseja commitar -> copia os arquivos da p
 
 Stash -> copia os arquivos da pasta terraform/config para a pasta commit 
 
+## Importante
+
 * O usuário não deve criar um recurso (Create) de mesmo tipo, antes de realizar um Commit Changes. Caso contrário, o arquivo de configuração do Terraform será sobrescrito e os recursos criados serão perdidos.
 
-Exemplo: O usuário cria um recurso do tipo `EC2 Instance` utilizando o Create. Em seguida, ele decide outro recurso do tipo `EC2 Instance` utilizando o Create. Nesse caso, o arquivo de configuração do Terraform, presente na pasta commit, será sobrescrito e o primeiro recurso criado será perdido.
+* Exemplo: O usuário cria um recurso do tipo `EC2 Instance` utilizando o Create. Em seguida, ele decide outro recurso do tipo `EC2 Instance` utilizando o Create. Nesse caso, o arquivo de configuração do Terraform, presente na pasta commit, será sobrescrito e o primeiro recurso criado será perdido.
 
 * Antes de utilizar o Update e o Delete é sugerido que o usuário utilize o Stash ou Commit Changes, para garantir que os arquivos da pasta commit estejam sincronizados com os da pasta terraform/config.
 
-OK
-Create -> Commit -> Apply
-Update -> Commit -> Apply
-Delete -> Commit -> Apply
-Create -> Delete -> Commit -> Apply
-
-NOT OK
-Create -> Create -> Commit -> Apply ()

@@ -47,3 +47,19 @@ def verify_files_to_commit():
             files_to_commit.append(i)
 
     return files_to_commit
+
+
+def policy_dict(answer):
+    print(answer)
+    policy_dict = {
+        "Version": "2012-10-17",
+        "Statement": [
+            {
+                "Effect": answer["policy_effect"],
+                "Action": answer["policy_actions"].split(","),
+                "Resource": answer["policy_resource"],
+            }
+        ],
+    }
+
+    return policy_dict

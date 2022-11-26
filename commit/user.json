@@ -1,1 +1,37 @@
-{"user_0": {"name": "John_Doe"}}
+{
+  "user_0": {
+    "name": "John_Doe",
+    "policy": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Deny",
+          "Action": [
+            "ec2:*"
+          ],
+          "Resource": "*"
+        }
+      ]
+    }
+  },
+  "user_1": {
+    "name": "Jane_Doe",
+    "policy": {}
+  },
+  "user_3": {
+    "name": "test_p",
+    "policy": {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Deny",
+          "Action": [
+            "ec2:*",
+            "s3:*"
+          ],
+          "Resource": "*"
+        }
+      ]
+    }
+  }
+}

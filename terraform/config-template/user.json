@@ -1,8 +1,21 @@
 {
     "user_0": {
-        "name": "John_Doe"
+        "name": "John_Doe",
+        "policy": {
+            "Version": "2012-10-17",
+            "Statement": [
+                {
+                    "Effect": "Deny",
+                    "Action": [
+                        "ec2:*"
+                    ],
+                    "Resource": "*"
+                }
+            ]
+        }
     },
     "user_1": {
-        "name": "Jane_Doe"
+        "name": "Jane_Doe",
+        "policy": {}
     }
 }
